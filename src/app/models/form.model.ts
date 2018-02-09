@@ -21,21 +21,20 @@ export class LoginFormControl extends FormControl {
             for (let errorName in this.errors) {
                 switch (errorName) {
                     case "required":
-                        messages.push(`You must enter a ${this.label}`);
+                        messages.push(`Вам нужно ввести ${this.label}`);
                         break;
                     case "minlength":
-                        messages.push(`A ${this.label} must be at least
+                        messages.push(`${this.label} должен иметь минимум
                             ${this.errors['minlength'].requiredLength}
-                            characters`);
+                            символа`);
                         break;
                     case "maxlength":
-                        messages.push(`A ${this.label} must be no more than
+                        messages.push(`${this.label} не должен иметь больше, чем
                             ${this.errors['maxlength'].requiredLength}
-                            characters`);
+                            символов`);
                         break;
                     case "pattern":
-                        messages.push(`The ${this.label} contains
-                             illegal characters`);
+                        messages.push(`В ${this.label} допустимы только цифры`);
                         break;
                 }
             }
