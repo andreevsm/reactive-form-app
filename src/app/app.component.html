@@ -1,32 +1,29 @@
-<app-header></app-header>
-<div class="main">
- 
-    <form novalidate [formGroup]="form" (ngSubmit)="submitForm(form)">
-        <div class="" *ngIf="formSubmitted && form.invalid">
-            There are problems with the form
-            <ul>
-                <li *ngFor="let error of form.getFormValidationMessages()">
-                    {{error}}
-                </li>
-            </ul>
+<div class="wrapper">
+    <app-header></app-header>
+    <div class="main">
+     
+        <div class="form">
+            <form novalidate [formGroup]="form" (ngSubmit)="submitForm(form)">
+                <div class="form-control" *ngFor="let control of form.productControls">
+                    
+                    <label for="{{control.modelProperty}}">{{control.label}}</label>
+                    <input id="{{control.modelProperty}}"
+                    name="{{control.modelProperty}}"
+                    formControlName="{{control.modelProperty}}"/>
+    
+                    <ul class="errors"
+                    *ngIf="control.dirty && control.invalid">
+                        <li *ngFor="let error of control.getValidationMessages()">
+                        {{error}}
+                        </li>
+                    </ul>
+                </div>
+                
+                <button type="submit"
+                [disabled]="form.invalid">
+                    Sign in
+                </button>
+            </form>
         </div>
-        <div class="" *ngFor="let control of form.productControls">
-            <label>{{control.label}}</label>
-            <input class=""
-            name="{{control.modelProperty}}"
-            formControlName="{{control.modelProperty}}"/>
-
-            <ul class=""
-            *ngIf="(formSubmitted || control.dirty) && control.invalid">
-                <li *ngFor="let error of control.getValidationMessages()">
-                {{error}}
-                </li>
-            </ul>
-        </div>
-
-        <button class="" type="submit"
-        [disabled]="form.invalid">
-            Create
-        </button>
-    </form>
+    </div>
 </div>
